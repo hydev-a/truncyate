@@ -27,7 +27,7 @@ pip install precision-truncator
 ## Quick Start
 
 ```python
-from precision_truncator import PrecisionTruncator, TruncationStrategy
+from truncyate import PrecisionTruncator, TruncationStrategy
 
 # Create a truncator that limits text to 100 tokens
 truncator = PrecisionTruncator(max_tokens=100)
