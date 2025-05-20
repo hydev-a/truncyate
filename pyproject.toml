@@ -31,9 +31,9 @@ dependencies = [
 requires-python = ">=3.7"
 
 [project.urls]
-"Homepage" = "https://github.com/yourusername/precision-truncator"
-"Bug Tracker" = "https://github.com/yourusername/precision-truncator/issues"
-"Documentation" = "https://precision-truncator.readthedocs.io/"
+"Homepage" = "https://github.com/hydev-a/truncyate/tree/main"
+"Bug Tracker" = "https://github.com/hydev/truncyate/issues"
+"Documentation" = "https://github.com/hydev-a/truncyate/tree/main"
 
 [project.scripts]
 truncyate = "truncyate.cli:main"
