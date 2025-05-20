@@ -1,4 +1,4 @@
-# Truncayte - Precision Truncator
+# Truncyate - Precision Truncator
 
 A smart text truncation tool for RAG systems and LLMs that preserves context while reducing text to desired lengths.
 
