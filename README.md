@@ -30,8 +30,8 @@ A smart text truncation tool for RAG systems and LLMs that **preserves context**
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/precision-truncator.git
-   cd precision-truncator
+   git clone https://github.com/hydev-a/truncyate.git
+   cd truncyate
    ```
 
 2. **Install in development mode**:
@@ -54,7 +54,7 @@ This installs the package system-wide and lets you modify the code as needed.
 ## 🧪 Quick Start
 
 ```python
-from precision_truncator import PrecisionTruncator, TruncationStrategy
+from truncyate import PrecisionTruncator, TruncationStrategy
 
 # Create a truncator to limit to 100 tokens
 truncator = PrecisionTruncator(max_tokens=100)
@@ -86,39 +86,39 @@ print("Smart strategy:\n", smart_truncated)
 
 ```bash
 # Truncate to 50 tokens
-precision-truncator "Your very long text goes here..." --tokens 50
+truncyate "Your very long text goes here..." --tokens 50
 
 # Truncate file and save output
-precision-truncator --input-file document.txt --output truncated.txt --tokens 100
+truncyate --input-file document.txt --output truncated.txt --tokens 100
 
 # Character-based truncation
-precision-truncator "Your text..." --chars 200
+truncyate "Your text..." --chars 200
 ```
 
 ### Truncation Strategies
 
 ```bash
 # Keep the beginning
-precision-truncator "Your text..." --tokens 50 --strategy start
+truncyate "Your text..." --tokens 50 --strategy start
 
 # Keep the ending
-precision-truncator "Your text..." --tokens 50 --strategy end
+truncyate "Your text..." --tokens 50 --strategy end
 
 # Keep start + end, truncate middle
-precision-truncator "Your text..." --tokens 50 --strategy middle
+truncyate "Your text..." --tokens 50 --strategy middle
 
 # Smart truncation (default)
-precision-truncator "Your text..." --tokens 50 --strategy smart
+truncyate "Your text..." --tokens 50 --strategy smart
 ```
 
 ### Piping and Sentence Options
 
 ```bash
 # Pipe input from another command
-cat document.txt | precision-truncator --tokens 100 > truncated.txt
+cat document.txt | truncyate --tokens 100 > truncated.txt
 
 # Disable sentence preservation
-precision-truncator "Your text..." --tokens 50 --no-keep-sentences
+truncyate "Your text..." --tokens 50 --no-keep-sentences
 ```
 
 ---
@@ -130,20 +130,20 @@ precision-truncator "Your text..." --tokens 50 --no-keep-sentences
 echo "This is a sample text file with multiple sentences..." > sample.txt
 
 # Smart truncation
-precision-truncator --input-file sample.txt --tokens 20 --strategy smart
+truncyate --input-file sample.txt --tokens 20 --strategy smart
 
 # Compare strategies
 echo "START STRATEGY:" > comparison.txt
-precision-truncator --input-file sample.txt --tokens 20 --strategy start >> comparison.txt
+truncyate --input-file sample.txt --tokens 20 --strategy start >> comparison.txt
 
 echo "\nEND STRATEGY:" >> comparison.txt
-precision-truncator --input-file sample.txt --tokens 20 --strategy end >> comparison.txt
+truncyate --input-file sample.txt --tokens 20 --strategy end >> comparison.txt
 
 echo "\nMIDDLE STRATEGY:" >> comparison.txt
-precision-truncator --input-file sample.txt --tokens 20 --strategy middle >> comparison.txt
+truncyate --input-file sample.txt --tokens 20 --strategy middle >> comparison.txt
 
 echo "\nSMART STRATEGY:" >> comparison.txt
-precision-truncator --input-file sample.txt --tokens 20 --strategy smart >> comparison.txt
+truncyate --input-file sample.txt --tokens 20 --strategy smart >> comparison.txt
 
 cat comparison.txt
 ```
@@ -184,7 +184,7 @@ Contributions are welcome! Follow these steps:
 
 ```bash
 # Fork and clone
-git clone https://github.com/yourusername/precision-truncator.git
+git clone https://github.com/yourusername/truncyate.git
 
 # Create a new branch
 git checkout -b feature-name
