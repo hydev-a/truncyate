@@ -32,13 +32,20 @@ A smart text truncation tool for RAG systems and LLMs that **preserves context**
    ```bash
    git clone https://github.com/yourusername/precision-truncator.git
    cd precision-truncator
-
+   ```
 
 2. **Install in development mode**:
 
    ```bash
    pip install -e .
    ```
+   
+3. **Make sure spaCy's model is installed**: 
+
+   ```bash
+   python -m spacy download en_core_web_lg
+   ```
+> ⚠️ a lighter en_core_web_sm version is to be released with optimized performance.
 
 This installs the package system-wide and lets you modify the code as needed.
 
