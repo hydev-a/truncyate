@@ -5,8 +5,7 @@ Core truncation functionality for the Precision Truncator.
 from enum import Enum
 import re
 from typing import List, Union, Optional
-from .utils import count_tokens, extract_key_sentences
-
+from .utils import count_tokens, extract_key_sentences, nlp, calculate_sentence_importance
 
 class TruncationStrategy(Enum):
     """Available truncation strategies."""
@@ -139,23 +138,35 @@ class PrecisionTruncator:
     
     def _truncate_smart(self, text: str, keep_sentences: bool) -> str:
         """Use semantic analysis to keep important parts."""
-        # Extract key sentences that fit within our limits
         sentences = extract_key_sentences(text)
+        if not sentences:
+            if self.max_chars:
+                return self._truncate_to_sentence_boundary(text[:self.max_chars]) if keep_sentences else text[:self.max_chars]
+            return " ".join(text.split()[:self.max_tokens]) if keep_sentences else text
+
+        # Re-score sentences to sort by importance
+        doc = nlp(text)  # Now nlp is defined
+        scored_sentences = [
+            (sentence, calculate_sentence_importance(sentence, i, len(sentences), doc))
+            for i, sentence in enumerate(sentences)
+        ]
+        # Sort by score (highest first)
+        scored_sentences.sort(key=lambda x: x[1], reverse=True)
         
         result = ""
         current_length = 0
-        
-        for sentence in sentences:
-            # Check if adding this sentence would exceed our limit
+        for sentence, score in scored_sentences:
             sentence_length = count_tokens(sentence) if self.max_tokens else len(sentence)
-            
             if current_length + sentence_length <= (self.max_tokens or self.max_chars):
-                result += sentence + " "
+                result += sentence + " "  # Always add a space
                 current_length += sentence_length
             else:
                 break
                 
-        return result.strip()
+        result = result.strip()
+        if keep_sentences and result:
+            result = self._truncate_to_sentence_boundary(result)
+        return result
     
     def _truncate_to_sentence_boundary(self, text: str, from_start: bool = True) -> str:
         """Adjust truncation to respect sentence boundaries."""
