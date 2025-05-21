@@ -207,6 +207,3 @@ This project is licensed under the **MIT License** – see the [LICENSE](./LICEN
 ```
 
 ---
-
-Let me know if you also want a logo/banner for this, or if you're thinking of turning it into a PyPI package later — I can help prep it for that too.
-```
